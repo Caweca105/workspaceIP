@@ -1,4 +1,4 @@
-class TestClass {
+// class TestClass {
 //	static void test () {
 //		String nullString = null;
 //		String emptyString = "";
@@ -13,7 +13,7 @@ class TestClass {
 //		String s3 = new String (word);
 //	}
 	
-	static void main() {
+	// static void main() {
 //		String nullString = null;
 //		String emptyString = "";
 //		String s1 = "Olá mundo";
@@ -48,8 +48,8 @@ class TestClass {
 //		ColorImage img2 = new ColorImage("coffee.jpg");
 //		img2.drawText(100, 100, "Teste", 30, Color.RED);
 		
-		ColorImage a = ColorImage.swapHalf();
+		// ColorImage a = ColorImage.swapHalf();
 		
-		return;
-	}
-}
+	// 	return;
+	// }
+// }
