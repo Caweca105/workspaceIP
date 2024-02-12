@@ -118,8 +118,6 @@ public class Date {
 			return daysBetween;
 		}
 	}
-	
-	
 
 	public boolean before(Date other) {
 		return this.year < other.year ||
