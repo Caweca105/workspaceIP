@@ -97,32 +97,28 @@ public class Date {
 	}
 
 	public int daysBetween(Date other) {
-		// If the dates are the same, return 0\
-		if (this.equals(other)) {
-			return 0;
+		if (this.year == other.year) {
+			// Both dates are in the same year
+			return Math.abs(this.daysSinceBeginYear() - other.daysSinceBeginYear());
+		} else {
+			// Dates are in different years
+			int daysBetween = 0;
+	
+			// Days remaining in the first year
+			daysBetween += this.daysUntilEndYear();
+	
+			// Days since the beginning of the second year
+			daysBetween += other.daysSinceBeginYear();
+	
+			// Add days of the years in between
+			for (int y = this.year + 1; y < other.year; y++) {
+				daysBetween += leapYear(y) ? 366 : 365;
+			}
+	
+			return daysBetween;
 		}
-	
-		// Check which date comes first
-		boolean thisIsFirst = this.before(other);
-	
-		Date startDate = thisIsFirst ? this : other;
-		Date endDate = thisIsFirst ? other : this;
-	
-		int sum = 0;
-	
-		// Calculate days for the years in between
-		for(int y = startDate.year + 1; y < endDate.year; y++) {
-			sum += leapYear(y) ? 366 : 365;
-		}
-	
-		// Add days from the start date to the end of its year
-		sum += startDate.daysUntilEndYear();
-	
-		// Add days from the start of the end year to the end date
-		sum += endDate.daysSinceBeginYear();
-	
-		return thisIsFirst ? sum : -sum;
 	}
+	
 	
 
 	public boolean before(Date other) {
