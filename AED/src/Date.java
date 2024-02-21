@@ -15,6 +15,7 @@ public class Date {
 		this.year = year;
 	}
 	
+//	Check if the function is valid
 	public static boolean isValid(int month, int day, int year) {
 		if (month < 1 || month > 12) {
 			return false;
@@ -34,6 +35,7 @@ public class Date {
 		return true;
 	}
 	
+//	Check how many days there are in each month
 	public static int dayInMonth(int month, int year) {
 		if (month == 4 || month == 6 || month == 9 || month == 11) return 30;
 		if (month == 2) {
@@ -45,6 +47,7 @@ public class Date {
 		return 31;
 	}
 	
+//	check if it is leap year or not
 	public static boolean leapYear(int year) {
 		if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0){
 			return true;
@@ -64,10 +67,12 @@ public class Date {
 		return year;
 	}
 	
+//	outputs the format of the string
 	public String toString() {
 		return month + "/" + day + "/" + year;
 	}
 
+//	Gives me how many days there are since the beginning of the year
 	public int daysSinceBeginYear()    {
         int sum = 0;
                 
@@ -82,6 +87,7 @@ public class Date {
         return sum;
     }
     
+//	Gives me how many days there are until end of year
     public int daysUntilEndYear() {
 		int sum = 0;
 	
@@ -96,6 +102,7 @@ public class Date {
 		return sum;
 	}
 
+//    Gives me the number of days between two dates
 	public int daysBetween(Date other) {
 		if (this.year == other.year) {
 			// Both dates are in the same year
@@ -114,17 +121,18 @@ public class Date {
 			for (int y = this.year + 1; y < other.year; y++) {
 				daysBetween += leapYear(y) ? 366 : 365;
 			}
-	
 			return daysBetween;
 		}
 	}
 
+//	Checks if one date is before the other
 	public boolean before(Date other) {
 		return this.year < other.year ||
 			(this.year == other.year && (this.month < other.month ||
 			(this.month == other.month && this.day < other.day)));
 	}
 
+//	Checks if one date is after the other
 	public boolean after(Date other) {
 		return this.year > other.year ||
 			(this.year == other.year && (this.month > other.month ||
