@@ -1,3 +1,4 @@
+package Aula01;
 import java.util.Scanner;
 
 public class Date {
@@ -103,6 +104,7 @@ public class Date {
 	}
 
 //    Gives me the number of days between two dates
+//	Método errado
 	public int daysBetween(Date other) {
 		if (this.year == other.year) {
 			// Both dates are in the same year
