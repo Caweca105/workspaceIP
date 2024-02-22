@@ -5,6 +5,7 @@ public class QuickFindUF {
     
     public QuickFindUF(int N) {
         id = new int[N];
+
         if (N < 0) throw new IllegalArgumentException("");
         
         for (int i = 0; i < N; i++) {
@@ -36,7 +37,7 @@ public class QuickFindUF {
     }
 
     public static void main(String[] args) {
-        QuickFindUF qf = new QuickFindUF(10);
+        QuickFindUF qf = new QuickFindUF(7);
         qf.union(4, 3);
         qf.union(3, 8);
         qf.union(6, 5);
