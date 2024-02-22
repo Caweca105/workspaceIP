@@ -37,7 +37,7 @@ public class QuickFindUF {
     }
 
     public static void main(String[] args) {
-        QuickFindUF qf = new QuickFindUF(7);
+        QuickFindUF qf = new QuickFindUF(10);
         qf.union(4, 3);
         qf.union(3, 8);
         qf.union(6, 5);
