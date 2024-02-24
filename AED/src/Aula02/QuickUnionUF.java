@@ -4,8 +4,10 @@ public class QuickUnionUF {
     private int[] id;
     
     public QuickUnionUF(int N) {
-        if (N < 0) throw new IllegalArgumentException("");
+        if (N < 0) throw new IllegalArgumentException("Size cannot be negative");
 
+        id = new int[N];
+        
         for (int i = 0; i < N; i++) {
             id[i] = i;
         }

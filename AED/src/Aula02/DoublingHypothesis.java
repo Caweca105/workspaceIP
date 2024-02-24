@@ -31,7 +31,7 @@ public class DoublingHypothesis {
     }
 
     private static void applyDoubleHypothesis() {
-        double previous = millisecondsToSeconds(getAverageTimeMillis(n, AVERAGE_OF));
+        double previous = millisecondsToSeconds(getAverageTimeMillis(125, AVERAGE_OF));
 
         double lgRatio = 0;
 
@@ -45,8 +45,8 @@ public class DoublingHypothesis {
             previous = time;
         }
 
-        double n = lgRatio;
-        System.out.println("lg(N) = " + n);
+//        double N = lgRatio;
+        System.out.println("lg(N) = " + N);
     }
 
     public static void main(String[] args) {
