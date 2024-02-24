@@ -1,55 +1,59 @@
 package Aula02;
 
 public class DoublingHypothesis {
-    private static final long LIMIT = 128000;
-    private static final int AVERAGE_OF = 5;
 
-    public static double getElapsedTimeMillis(int N) {
-        QuickFindUF qf = new QuickFindUF(N);
-        long start = System.currentTimeMillis();
-        for (int i = 0; i < LIMIT; i++) {
-            qf.union(0, N-1);
+	private static final long LIMIT = 128000; //250*2^9
+	private static final int AVERAGE_OF = 5;
+	
+	public static double getLapsedTimeMillis(int N) {
+		
+		QuickFindUF uf = new QuickFindUF (N);
+		double start = System.currentTimeMillis();
+		for (int i = 0; i < N; i++) {
+			int p = randint(0, N-1);
+			int q = randint(0, N-1);
+			uf.union(p,q);
+		}
+		double end = System.currentTimeMillis();
+		return end-start;	
+	}
+	
+	public static int randint (int start, int end){
+		return (int) (start+(end-start)*Math.random());
+	}
+	
+	public static double getAverageTimeMillis (int N, int trials) {
+		double sum = 0;
+
+		for (int i = 0; i < trials; i++) {
+            sum+=getLapsedTimeMillis(N);
         }
-        long end = System.currentTimeMillis();
-        return (end - start);
-    }
-
-    public static int randInt(int start, int end) {
-        return start + (int) (Math.random() * (end - start + 1));
-    }
-
-    public static double getAverageTimeMillis(int N, int trials) {
-        double time = 0;
-        for (int i = 0; i < trials; i++) {
-            time += getElapsedTimeMillis(N);
-        }
-        return time / trials;
-    }
-
-    public static double millisecondsToSeconds(double time) {
-        return time / 1000;
-    }
-
-    private static void applyDoubleHypothesis() {
-        double previous = millisecondsToSeconds(getAverageTimeMillis(125, AVERAGE_OF));
-
-        double lgRatio = 0;
-
-        System.out.println("N\tTime\tRatio\tlgRatio");
-
-        for (int N = 250; true; N += N) {
-            double time = millisecondsToSeconds(getAverageTimeMillis(N, AVERAGE_OF));
-            double ratio = time / previous;
-            lgRatio = Math.log(ratio) / Math.log(2);
-            System.out.printf("%d\t%.3f\t%.3f\t%.3f\n", N, time, ratio, lgRatio);
-            previous = time;
-        }
-
-//        double N = lgRatio;
-        System.out.println("lg(N) = " + N);
-    }
-
-    public static void main(String[] args) {
-        applyDoubleHypothesis();
-    }
+		return sum/trials;
+	}
+	
+	public static double millisecondsToSeconds (double millis) {
+		return millis/1000;
+	}
+	
+	private static void applyDoubleHypothesis () {
+		double previous = millisecondsToSeconds(getAverageTimeMillis(125, AVERAGE_OF));
+		double lgratio = 0;
+		
+		System.out.println("Double Hypothesis\n");
+		System.out.println("N\t\tT(N)\t\tratio\t\tlg(ratio)");
+		
+		for (int n=250; n<=LIMIT; n+=n) {
+			double time = millisecondsToSeconds(getAverageTimeMillis(n, AVERAGE_OF));
+			double ratio = time/previous;
+			lgratio = Math.log(ratio)/Math.log(2);
+			System.out.printf("%d\t\t%.3f\t\t%.3f\t\t%.3f\n", n, time, ratio, lgratio);
+			previous = time;
+		}
+		double b = lgratio;
+		System.out.println("b="+b);
+	}	
+	
+	public static void main(String[] args) {
+		applyDoubleHypothesis();
+	}
 }

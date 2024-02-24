@@ -5,7 +5,7 @@ public class WeightedQUPathCompressionUF {
     private int[] sz;
     
     public WeightedQUPathCompressionUF(int N) {
-        if (N < 0) throw new IllegalArgumentException("");
+        if (N < 0) throw new IllegalArgumentException("Size cannot be negative");
         
         id = new int[N];
         sz = new int[N];
