@@ -51,7 +51,7 @@ public class Queue<T> implements Iterable<T> {
 	 * @throws NoSuchElementException if the queue is empty
 	 */
 	public T dequeue() {
-		if (isEmpty()) throw new NoSuchElementException("Queue underflow");
+		if (isEmpty()) throw new NoSuchElementException("Queue is empty");
 		T item = first.item;
 		first = first.next;
 		n--;
