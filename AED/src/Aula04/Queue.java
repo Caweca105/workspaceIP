@@ -3,6 +3,13 @@ package Aula04;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * The Queue class represents a generic queue (FIFO) of items.
+ * It supports enqueue and dequeue operations, as well as checking if the queue is empty and getting its size.
+ * It also provides an iterator to iterate over the items in the queue.
+ *
+ * @param <T> the type of items in the queue
+ */
 public class Queue<T> implements Iterable<T> {
 	private Node first;
 	private Node last;
@@ -13,12 +20,20 @@ public class Queue<T> implements Iterable<T> {
 		public Node next;
 	}
 
+	/**
+	 * Initializes an empty queue.
+	 */
 	public Queue() {
 		first = null;
 		last = null;
 		n = 0;
 	}
 
+	/**
+	 * Adds an item to the end of the queue.
+	 *
+	 * @param item the item to enqueue
+	 */
 	public void enqueue(T item) {
 		Node oldLast = last;
 		last = new Node();
@@ -29,6 +44,12 @@ public class Queue<T> implements Iterable<T> {
 		n++;
 	}
 
+	/**
+	 * Removes and returns the item at the front of the queue.
+	 *
+	 * @return the item at the front of the queue
+	 * @throws NoSuchElementException if the queue is empty
+	 */
 	public T dequeue() {
 		if (isEmpty()) throw new NoSuchElementException("Queue underflow");
 		T item = first.item;
@@ -38,16 +59,31 @@ public class Queue<T> implements Iterable<T> {
 		return item;
 	}
 
+	/**
+	 * Checks if the queue is empty.
+	 *
+	 * @return true if the queue is empty, false otherwise
+	 */
 	public boolean isEmpty() {
 		return first == null;
 	}
 
+	/**
+	 * Returns the number of items in the queue.
+	 *
+	 * @return the number of items in the queue
+	 */
 	public int size() {
 		return n;
 	}
 
+	/**
+	 * Shifts the queue by moving the last item to the front.
+	 *
+	 * @throws NoSuchElementException if the queue is empty
+	 */
 	public void shift() {
-		if (isEmpty()) throw new NoSuchElementException("Queue underflow");
+		if (isEmpty()) throw new NoSuchElementException("Queue is empty");
 		Node oldLast = last;
 		last = new Node();
 		last.item = oldLast.item;
@@ -55,6 +91,11 @@ public class Queue<T> implements Iterable<T> {
 		first = last;
 	}
 
+	/**
+	 * Returns an iterator to iterate over the items in the queue.
+	 *
+	 * @return an iterator to iterate over the items in the queue
+	 */
 	public Iterator<T> iterator() {
 		return new ListIterator();
 	}
@@ -73,6 +114,7 @@ public class Queue<T> implements Iterable<T> {
 			return item;
 		}
 	}
+
 	public static void main(String[] args) {
 		// Create a new queue
 		Queue<Integer> queue = new Queue<>();
