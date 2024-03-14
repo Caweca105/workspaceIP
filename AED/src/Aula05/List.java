@@ -4,6 +4,12 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Stack;
 
+/**
+ * The List class represents a singly linked list data structure.
+ * It implements the Iterable interface, allowing iteration over the elements in the list.
+ *
+ * @param <T> the type of elements stored in the list
+ */
 public class List<T> implements Iterable<T> {
     private Node first;
     private Node last;
@@ -19,11 +25,20 @@ public class List<T> implements Iterable<T> {
         }
     }
 
+    /**
+     * Initializes a new instance of the List class.
+     * The list is initially empty.
+     */
     public List() {
         first = last = null;
         size = 0;
     }
 
+    /**
+     * Adds the specified item to the end of the list.
+     *
+     * @param item the item to be added
+     */
     public void add(T item) {
         Node newNode = new Node(item);
         if (isEmpty()) {
@@ -35,6 +50,13 @@ public class List<T> implements Iterable<T> {
         size++;
     }
 
+    /**
+     * Retrieves the element at the specified index in this list.
+     *
+     * @param index the index of the element to retrieve
+     * @return the element at the specified index
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size)
+     */
     public T get(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
         Node current = first;
@@ -44,6 +66,13 @@ public class List<T> implements Iterable<T> {
         return current.item;
     }
 
+    /**
+     * Removes and returns the element at the specified index in this list.
+     *
+     * @param index the index of the element to be removed
+     * @return the element previously at the specified position
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size)
+     */
     public T remove(int index) {
         if (index < 0 || index >= size) throw new IndexOutOfBoundsException();
         Node prev = null;
@@ -63,6 +92,12 @@ public class List<T> implements Iterable<T> {
         return current.item;
     }
 
+    /**
+     * Removes the first occurrence of the specified item from the list.
+     *
+     * @param item the item to be removed
+     * @return true if the item was found and removed, false otherwise
+     */
     public boolean removeFirst(T item) {
         for (Node prev = null, current = first; current != null; prev = current, current = current.next) {
             if (current.item.equals(item)) {
@@ -80,6 +115,12 @@ public class List<T> implements Iterable<T> {
         return false;
     }
 
+    /**
+     * Removes the last occurrence of the specified item from the list.
+     *
+     * @param item the item to be removed
+     * @return true if the item was found and removed, false otherwise
+     */
     public boolean removeLast(T item) {
         Node prevToRemove = null;
         Node toRemove = null;
@@ -103,6 +144,12 @@ public class List<T> implements Iterable<T> {
         return false;
     }
 
+    /**
+     * Removes all occurrences of the specified item from the list.
+     *
+     * @param item the item to be removed from the list
+     * @return true if at least one occurrence of the item was removed, false otherwise
+     */
     public boolean removeAll(T item) {
         boolean removed = false;
         while (removeFirst(item)) {
@@ -111,10 +158,21 @@ public class List<T> implements Iterable<T> {
         return removed;
     }
 
+    /**
+     * Checks if the list is empty.
+     * 
+     * @return true if the list is empty, false otherwise.
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Checks if the list contains the specified item.
+     *
+     * @param item the item to be checked for existence in the list
+     * @return true if the list contains the item, false otherwise
+     */
     public boolean contains(T item) {
         for (Node current = first; current != null; current = current.next) {
             if (current.item.equals(item)) {
@@ -124,10 +182,21 @@ public class List<T> implements Iterable<T> {
         return false;
     }
 
+    /**
+     * Returns the number of elements in the list.
+     *
+     * @return the number of elements in the list
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * Checks if the linked list is a palindrome.
+     * A linked list is considered a palindrome if it reads the same forwards and backwards.
+     *
+     * @return true if the linked list is a palindrome, false otherwise.
+     */
     public boolean isPalindrome() {
         if (isEmpty() || size == 1) return true;
         Stack<T> stack = new Stack<>();
@@ -145,6 +214,11 @@ public class List<T> implements Iterable<T> {
         return true;
     }
 
+    /**
+     * Returns an iterator over the elements in this list in proper sequence.
+     *
+     * @return an iterator over the elements in this list
+     */
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             private Node current = first;
@@ -160,5 +234,47 @@ public class List<T> implements Iterable<T> {
                 return item;
             }
         };
+    }
+
+    public static void main(String[] args) {
+        List<String> list = new List<>();
+        System.out.println("Is empty: " + list.isEmpty());
+        list.add("apple");
+        list.add("banana");
+        list.add("orange");
+        list.add("banana");
+        list.add("apple");
+        list.add("nozes");
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+        System.out.println("Size: " + list.size());
+        System.out.println("Is palindrome: " + list.isPalindrome());
+        list.remove(2);
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+        System.out.println("Size: " + list.size());
+        System.out.println("Is palindrome: " + list.isPalindrome());
+        list.removeFirst("banana");
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+        System.out.println("Size: " + list.size());
+        System.out.println("Is palindrome: " + list.isPalindrome());
+        list.remove(2);
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+        System.out.println("Size: " + list.size());
+        System.out.println("Is palindrome: " + list.isPalindrome());
+        list.removeLast("nozes");
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+        System.out.println("Size: " + list.size());
+        System.out.println("Is palindrome: " + list.isPalindrome());
+        System.out.println("Contains 'banana': " + list.contains("banana"));
+        System.out.println("What's the first item'': " + list.get(0));
     }
 }
