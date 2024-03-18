@@ -262,7 +262,7 @@ public class List<T> implements Iterable<T> {
         }
         System.out.println("Size: " + list.size());
         System.out.println("Is palindrome: " + list.isPalindrome());
-        list.remove(2);
+        list.removeAll("banana");
         for (String fruit : list) {
             System.out.println(fruit);
         }
@@ -276,5 +276,10 @@ public class List<T> implements Iterable<T> {
         System.out.println("Is palindrome: " + list.isPalindrome());
         System.out.println("Contains 'banana': " + list.contains("banana"));
         System.out.println("What's the first item'': " + list.get(0));
+        list.add("apple");
+        for (String fruit : list) {
+            System.out.println(fruit);
+        }
+        System.out.println("Is palindrome: " + list.isPalindrome());
     }
 }
