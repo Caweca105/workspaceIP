@@ -7,6 +7,10 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
     private Node first;
     private int size = 0;
 
+    /***
+     * Node class to represent each element in the list.
+     * @param <T> the type of the element to be stored in the list.
+     */
     private class Node {
         T item;
         Node next;
@@ -17,6 +21,9 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
         }
     }
     
+    /**
+     * 
+     */
     public OrderedList() {
     }
 
@@ -39,6 +46,12 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
         size++;
     }
 
+    /**
+     * Removes the first occurrence of the specified element from this list, if it is present.
+     * If the list does not contain the element, it is unchanged.
+     * @param item element to be removed from this list, if present
+     * @return true if the list contained the specified element, false otherwise
+     */
     public boolean contains (T item) {
         Node current = first;
         while (current != null) {
@@ -50,14 +63,28 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
         return false;
     }
 
+    /**
+     * Removes the first occurrence of the specified element from this list, if it is present.
+     * @return
+     */
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Returns the number of elements in this list.
+     * @return
+     */
     public int size() {
         return size;
     }
 
+    /**
+     * Removes the first occurrence of the specified element from this list, if it is present.
+     * If the list does not contain the element, it is unchanged.
+     * @param item element to be removed from this list, if present
+     * @return true if the list contained the specified element, false otherwise
+     */
     public void sort() {
         if (first == null || first.next == null) {
             return; // The list is already sorted or empty.
@@ -80,13 +107,15 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
                 current.next = temp.next;
                 temp.next = current;
             }
-    
             current = next; // Move to the next node.
         }
-    
         first = sorted; // Update the list to be the sorted list.
     }
 
+    /**
+     * Returns true if the list is sorted in ascending order.
+     * @return
+     */
     public boolean isSorted() {
         if (first == null || first.next == null) return true; // Empty or single element lists are sorted.
     
@@ -100,6 +129,9 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
         return true; // No items were out of order.
     }
 
+    /**
+     * Shuffles the list in place.
+     */
     public void shuffle() {
         if (first == null) return; // List is empty, nothing to shuffle.
     
@@ -117,6 +149,11 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
         }
     }
     
+    /**
+     * Returns the node at the specified index.
+     * @param index
+     * @return
+     */
     private Node nodeAt(int index) {
         Node current = first;
         for (int i = 0; i < index && current != null; i++) {
@@ -125,7 +162,10 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
         return current;
     }
     
-
+    /**
+     * Returns an iterator over the elements in this list in proper sequence.
+     * @return
+     */
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
@@ -146,6 +186,9 @@ public class OrderedList<T extends Comparable<T>> implements Iterable<T> {
 
     public static void main(String[] args) {
         OrderedList<Integer> list = new OrderedList<>();
+        // Expected: true, since the list is empty.
+        System.out.println("Is the list empty? " + list.isEmpty());
+        
         // Add elements
         list.add(3);
         list.add(1);
